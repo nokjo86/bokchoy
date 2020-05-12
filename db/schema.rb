@@ -37,26 +37,26 @@ ActiveRecord::Schema.define(version: 2020_05_12_025329) do
   end
 
   create_table "listings", force: :cascade do |t|
-    t.bigint "user_profile_id", null: false
+    t.bigint "profile_id", null: false
     t.string "title"
     t.text "description"
     t.integer "delivery"
     t.boolean "closed", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_profile_id"], name: "index_listings_on_user_profile_id"
+    t.index ["profile_id"], name: "index_listings_on_profile_id"
   end
 
-  create_table "user_profiles", force: :cascade do |t|
+  create_table "profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "first_name"
     t.string "last_name"
     t.float "geo_lat"
     t.float "geo_long"
-    t.string "shipping_address"
+    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -75,6 +75,6 @@ ActiveRecord::Schema.define(version: 2020_05_12_025329) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "listings", "user_profiles"
-  add_foreign_key "user_profiles", "users"
+  add_foreign_key "listings", "profiles"
+  add_foreign_key "profiles", "users"
 end
