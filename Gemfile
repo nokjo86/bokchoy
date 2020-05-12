@@ -50,3 +50,7 @@ gem "rspec-rails", "~> 4.0", :groups => [:development, :test]
 gem "devise", "~> 4.7"
 
 gem "cancancan", "~> 3.1"
+
+gem "aws-sdk-s3", "~> 1.64"
+
+gem "geocoder", "~> 1.6"

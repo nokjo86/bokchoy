@@ -1,0 +1,9 @@
+<h1><%= @profile.user.username %></h1>
+<p><%= @profile.first_name %></p>
+<p><%= @profile.last_name %></p>
+
+<% @listings.each do |listing| %>
+<%= listing.title %>
+<%= link_to 'Edit', edit_listing_path(listing.id)%> 
+<%= link_to 'Delete Item', listing_path(listing.id), method: :delete, data: { confirm: 'Are you sure?' }   %>
+<% end %>
