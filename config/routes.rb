@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#index'
   #home page to access to other area
-  resources :user_profiles, except: [:destroy]
+  get 'profile/user/:id', to: 'profiles#show', as: 'profile'
+  get 'profile/edit', to: 'profiles#edit'
+  put 'profile', to: 'profiles#update'
+  patch 'profile', to: 'profiles#update'
+  match 'profile/user/:id' => 'profiles#update', via: :patch
+
   #user_profile should only be deleted if account is no longer exists
-  #user_profiles should only be accessible with admin right
   resources :listings
 end

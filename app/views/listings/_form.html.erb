@@ -1,0 +1,14 @@
+<%= render "shared/form-errors", resource: listing %>
+<%= form_with model: listing, local: true, class: "profile-form" do |form| %>
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+  <%= form.label :delivery_method %>
+  <%= select_tag :delivery, options_for_select(Listing.deliveries) %>
+
+  <%= form.label :picture %> 
+  <%= form.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+
+  <%= form.submit %>
+<% end %>
