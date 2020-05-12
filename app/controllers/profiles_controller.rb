@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, except: :show
-  before_action :set_profile
+  before_action :set_profile, except: :show
 
   def show
     @profile = Profile.find(params[:id])
