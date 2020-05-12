@@ -7,7 +7,8 @@ class User < ApplicationRecord
   after_create :init_profile
 
   def init_profile
-    self.create_profile
+    profile = Profile.new(user_id: self.id)
+    profile.save(validate: false)
   end
 
 end
