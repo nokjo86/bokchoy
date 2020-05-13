@@ -11,7 +11,7 @@ before_action :check_existed?, except: [:create, :destroy]
       @existing_item.save
     end
     check_existed?
-    flash[:bought] = "#{@existing_item.quantity} items in blasket"
+    flash[:bought] = "#{@existing_item.quantity} items in basket"
     redirect_to request.referer
   end
 

@@ -1,4 +1,4 @@
-<h1>Shopping blasket</h1>
+<h1>Shopping basket</h1>
 <% if @cart.length > 0 %>
   <% total = 0%>
   <% @cart.each do |item| %>
@@ -15,5 +15,5 @@
   <% end %>
   <%= "$""%.2f" % total %>
 <% else %>
-<%= "Your blasket is empty, start shopping now" %>
+<%= "Your veggie box is currently empty, start shopping now" %>
 <% end %>

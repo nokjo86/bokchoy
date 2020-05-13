@@ -10,7 +10,7 @@
 <%= form.label :quantity, "Number"%>
 <%= form.number_field :quantity, size: "1", step: 1, value: 1 %>
 <%= form.hidden_field :listing_id, value: @listing.id %>
-<%= form.submit "Add to blasket" %><% end %>
+<%= form.submit "Add to basket" %><% end %>
 <% if flash[:bought] %>
   <span><%= flash[:bought] %></span>
 <% end %>
