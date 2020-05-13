@@ -13,7 +13,7 @@ class ListingsController < ApplicationController
   end
 
   def create
-     @listing = current_user.profile.listings.create(listing_params)
+    @listing = current_user.profile.listings.create(listing_params)
     if @listing.errors.any?
       render :new
     else
@@ -45,7 +45,7 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-  params.require(:listing).permit(:title, :description, :picture, :delivery)
+  params.require(:listing).permit(:title, :description, :price, :picture, :delivery)
   end
 
 

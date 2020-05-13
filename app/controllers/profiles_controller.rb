@@ -12,10 +12,7 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    profile_params[:location] == "" ? search_code = Geocoder.search(profile_params[:address]) : search_code = Geocoder.search(profile_params[:location]) 
-    geocode = search_code.first.coordinates
-    geocode_hash = {geo_lat: sprintf("%.4f",geocode.first).to_f, geo_long: sprintf("%.4f",geocode.last).to_f}
-    if @profile.update(profile_params.merge(geocode_hash).except(:location))
+    if @profile.update(profile_params)
       redirect_to profile_path(@profile.id)
     else
       render :edit
@@ -28,7 +25,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:location, :first_name, :last_name, :address)
+    params.require(:profile).permit(:first_name, :last_name, :address_line1, :address_line2, :suburb, :state, :postcode, :country)
   end
 
   def set_profile

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_230604) do
+ActiveRecord::Schema.define(version: 2020_05_13_025826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,11 +52,16 @@ ActiveRecord::Schema.define(version: 2020_05_12_230604) do
     t.bigint "user_id", null: false
     t.string "first_name"
     t.string "last_name"
-    t.float "geo_lat"
-    t.float "geo_long"
-    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.string "address_line1"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "address_line2"
+    t.string "suburb"
+    t.string "state"
+    t.string "postcode"
+    t.string "country"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

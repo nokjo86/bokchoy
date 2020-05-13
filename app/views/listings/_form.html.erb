@@ -1,14 +1,26 @@
 <%= render "shared/form-errors", resource: listing %>
 <%= form_with model: listing, local: true, class: "profile-form" do |form| %>
+<div>
   <%= form.label :title %>
   <%= form.text_field :title %>
+</div>
+<div>
   <%= form.label :description %>
-  <%= form.text_field :description %>
+  <%= form.text_area :description %>
+</div>
+<div>
+  <%= form.label :price %>
+  <%= form.number_field :price, step: 0.5%>
+</div>
+<div>
+  <%# <%= select_tag :delivery, options_for_select(Listing.deliveries) %> 
   <%= form.label :delivery_method %>
-  <%= select_tag :delivery, options_for_select(Listing.deliveries) %>
-
+  <%= form.collection_radio_buttons :delivery, Listing.deliveries, :first, :first %>
+</div>
+<div>
   <%= form.label :picture %> 
   <%= form.file_field :picture, accept: 'image/png,image/gif,image/jpeg,image/jpg' %>
+</div>
 
   <%= form.submit %>
 <% end %>
