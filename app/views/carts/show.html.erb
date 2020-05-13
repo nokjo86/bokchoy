@@ -1,5 +1,6 @@
 <h1>Shopping blasket</h1>
 <% if @cart.length > 0 %>
+  <% total = 0%>
   <% @cart.each do |item| %>
   <%= link_to item.title, listing_path(item.id) %>
     <%= form_with model: relationship(item), local: true, method: :put do |form| %>
@@ -7,9 +8,12 @@
       <%= form.hidden_field :listing_id, value: item.id %>
       <%= form.submit "Edit" %>
     <% end %>
-      <%= relationship(item).quantity * item.price %>
+      <% subtotal = relationship(item).quantity * item.price %>
+      <%= "$""%.2f" % subtotal%>
+      <% total += subtotal %>
     <%= button_to "Delete", relationship(item), method: :delete %>
   <% end %>
+  <%= "$""%.2f" % total %>
 <% else %>
 <%= "Your blasket is empty, start shopping now" %>
 <% end %>

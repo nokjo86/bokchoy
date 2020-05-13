@@ -4,6 +4,7 @@
 
 <h1><%= @listing.title %></h1>
 <p><%= @listing.description %></p>
+<%= "$""%.2f" % @listing.price %>
 
 <%= form_with model: CartItem.new, local: true, method: :post do |form| %>
 <%= form.label :quantity, "Number"%>
