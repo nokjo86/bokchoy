@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_listing, only: [:show, :edit, :destroy]
+  before_action :set_listing, only: [:show, :edit, :update, :destroy]
   
   def index
   end
@@ -27,7 +27,7 @@ class ListingsController < ApplicationController
 
   def update
     if @listing.update(listing_params)
-      redirect_to listing_path(@profile.id)
+      redirect_to listing_path(@listing.id)
     else
       render :edit
     end
@@ -47,6 +47,5 @@ class ListingsController < ApplicationController
   def listing_params
   params.require(:listing).permit(:title, :description, :price, :picture, :delivery)
   end
-
 
 end

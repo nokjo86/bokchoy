@@ -10,7 +10,7 @@
 </div>
 <div>
   <%= form.label :price %>
-  <%= form.number_field :price, step: 0.5%>
+  <%= form.number_field :price, min: 0, step: 0.01 %><span>per unit<span>
 </div>
 <div>
   <%# <%= select_tag :delivery, options_for_select(Listing.deliveries) %> 
