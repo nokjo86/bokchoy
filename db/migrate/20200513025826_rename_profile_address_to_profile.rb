@@ -5,7 +5,6 @@ class RenameProfileAddressToProfile < ActiveRecord::Migration[6.0]
     add_column :profiles, :suburb, :string
     add_column :profiles, :state, :string
     add_column :profiles, :postcode, :string
-    add_column :profiles, :country, :string
 
   end
 end

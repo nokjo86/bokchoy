@@ -4,14 +4,22 @@ class Profile < ApplicationRecord
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
   validates :address_line1, presence: true, length: { minimum: 5 }
-  validates :suburb, :state, :country, presence: true
+  validates :suburb, :state, presence: true
   validates :postcode, presence: true, length: { is: 4 }
-
   geocoded_by :address
-  after_validation :geocode
+  after_validation :geocode_or_reset_coordinates, if: :address_line1_changed?
 
   def address
-    [address_line1, address_line2, suburb, state, postcode, country].join(',')
+    [address_line1, address_line2, suburb, state, postcode,"Australia"].join(',')
+  end
+
+  private
+
+  def geocode_or_reset_coordinates
+    if geocode.nil?
+      self.latitude = nil
+      self.longitude = nil
+    end
   end
 
 end

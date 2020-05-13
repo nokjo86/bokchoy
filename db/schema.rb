@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2020_05_13_025826) do
     t.string "suburb"
     t.string "state"
     t.string "postcode"
-    t.string "country"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
