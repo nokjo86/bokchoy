@@ -1,0 +1,9 @@
+<h1>Shopping blasket</h1>
+<% if @cart.length > 0 %>
+<% @cart.each do |item| %>
+<%= link_to item.title, listing_path(item.id) %>
+<%= CartItem.find_by(listing_id: item.id).quantity %>
+<% end %>
+<% else %>
+<%= "Your cart is empty, start shopping now" %>
+<% end %>
