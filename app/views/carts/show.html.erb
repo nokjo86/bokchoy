@@ -1,9 +1,15 @@
 <h1>Shopping blasket</h1>
 <% if @cart.length > 0 %>
-<% @cart.each do |item| %>
-<%= link_to item.title, listing_path(item.id) %>
-<%= CartItem.find_by(listing_id: item.id).quantity %>
-<% end %>
+  <% @cart.each do |item| %>
+  <%= link_to item.title, listing_path(item.id) %>
+    <%= form_with model: relationship(item), local: true, method: :put do |form| %>
+      <%= form.number_field :quantity, size: "1", step: 1 %>
+      <%= form.hidden_field :listing_id, value: item.id %>
+      <%= form.submit "Edit" %>
+    <% end %>
+      <%= relationship(item).quantity * item.price %>
+    <%= button_to "Delete", relationship(item), method: :delete %>
+  <% end %>
 <% else %>
-<%= "Your cart is empty, start shopping now" %>
+<%= "Your blasket is empty, start shopping now" %>
 <% end %>
