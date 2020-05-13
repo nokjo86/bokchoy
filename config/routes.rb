@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   #user_profile should only be deleted if account is no longer exists
   resources :listings
+  get 'cart', to: 'carts#show'
+  resources :cart_items
+
 end
