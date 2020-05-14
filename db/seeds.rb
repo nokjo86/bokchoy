@@ -15,7 +15,7 @@ users.each do |user|
   listing = seller.profile.listings.create(
     title: listings[i],
     description: Faker::Lorem.sentences(number: 3).join(" "),
-    price: rand(1.01..5.00),
+    price: rand(0.01..5.00).round(2),
     delivery: rand(1..3)
   )
   listings[i] = listing
