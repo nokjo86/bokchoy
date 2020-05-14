@@ -1,0 +1,8 @@
+<h1>Orders</h1>
+<%= @order.created_at.to_formatted_s(:long) %>
+<% @order_items.each do |item| %>
+  <% listing = Listing.find(item.listing_id) %>
+  <%= link_to listing.title, listing_path(listing.id) %>
+  <%= item.quantity %>
+  <%= "$""%.2f" % @order.total_amount_paid %>
+<% end %>
