@@ -56,3 +56,5 @@ gem "aws-sdk-s3", "~> 1.64"
 gem "geocoder", "~> 1.6"
 
 gem "faker", "~> 2.11"
+
+gem "stripe", "~> 5.22"
