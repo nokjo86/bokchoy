@@ -14,6 +14,13 @@
     <%= button_to "Delete", relationship(item), method: :delete %>
   <% end %>
   <%= "$""%.2f" % total %>
+  <%# <% hidden_field_tag 'seller', item.profile.id %> %>
+  <%= link_to "Pay Deposit", "", id: "stripe" %>  
+
 <% else %>
 <%= "Your veggie box is currently empty, start shopping now" %>
 <% end %>
+
+<% item = @cart.first %>
+
+<%= javascript_pack_tag "stripe" %>
