@@ -1,0 +1,11 @@
+<h1>Purchase History</h1>
+<% if @orders.length > 0 %>
+  <% @orders.each do |order| %>
+    <%= order.created_at.to_formatted_s(:long) %>
+    <%= "$""%.2f" % order.total_amount_paid %>
+    <%= order.delivery %>
+    <%= link_to "View details", order_path(order.id) %>
+  <% end %>
+  <% else %>
+    <% "No purchase recorded" %>
+  <% end %>
