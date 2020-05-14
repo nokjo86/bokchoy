@@ -14,12 +14,17 @@
     <%= button_to "Delete", relationship(item), method: :delete %>
   <% end %>
   <%= "$""%.2f" % total %>
-  <%# <% hidden_field_tag 'seller', item.profile.id %> %>
+  <input type="radio" id="delivery" value=1 checked>
+  <label for="male">Local Pickup</label><br>
+  <input type="radio" id="delivery" value=2>
+  <label for="female">Delivery</label><br>
+  <%# <% hidden_field_tag 'seller', item.profile.id %>
   <%= link_to "Pay Deposit", "", id: "stripe" %>  
 
 <% else %>
 <%= "Your veggie box is currently empty, start shopping now" %>
 <% end %>
+
 
 <% item = @cart.first %>
 
