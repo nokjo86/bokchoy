@@ -1,19 +1,37 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require_relative "data/users"
 
-puts "All user records deleted"
-User.delete_all
+listings = [
+    "Yummy Tomato for sale",
+    "Green Bokchoy fresh from yard",
+    "Best batch ever beets"
+  ]
 
-User.create(
-  username: "admin",
-  email: "admin@admin.com",
-  password: "password",
-  admin: true,
-)
+puts "All #{User.all.length} user record/s deleted"
+User.destroy_all
 
-puts "#{User.all.length} record/s created."
+i = 0
+users.each do |user|
+  seller = User.create(user)
+  listing = seller.profile.listings.create(
+    title: listings[i],
+    description: Faker::Lorem.sentences(number: 2),
+    price: rand(1.01..5.00),
+    delivery: rand(1..3)
+  )
+  listings[i] = listing
+  i += 1
+end
+
+i = 0
+listings.each do |listing|
+  listing.picture.attach(
+    io: File.open("app/assets/images/#{i}.jpg"),
+    filename: "test#{i}.jpg",
+    content_type: "image/jpg"
+  )
+  i += 0
+end
+
+puts listings
+puts "#{User.all.length} user record/s created."
+
