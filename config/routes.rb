@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :listings
   get 'cart', to: 'carts#show'
   resources :cart_items
+  get "/payments/session", to:"payments#get_stripe_id"
 
 end

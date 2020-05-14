@@ -1,7 +1,7 @@
 class Profile < ApplicationRecord
   belongs_to :user
   has_one :cart, dependent: :destroy
-  has_many :listings
+  has_many :listings, dependent: :destroy
   validates :first_name, presence: true, length: { minimum: 2 }
   validates :last_name, presence: true, length: { minimum: 2 }
   validates :address_line1, presence: true, length: { minimum: 5 }
