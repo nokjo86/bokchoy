@@ -30,3 +30,18 @@ class PaymentsController < ApplicationController
   end
 end
 # payments/success?userId=#{current_user.id}&listingId=#{@listing.id}
+  def success
+    cartitems = current_user.profile.cart.cart_items
+    list_of_items = []
+    cartitems.each do |item|
+      listing = Listing.find(item.listing_id)
+      item_info = {
+        name: listing.title,
+        description: listing.description,
+        amount: listing.price * 100,
+        currency: 'aud',
+        quantity: item.quantity
+      }
+      list_of_items << item_info
+    end
+  end
