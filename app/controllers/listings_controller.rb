@@ -4,6 +4,7 @@ class ListingsController < ApplicationController
   before_action :set_profile, only: [:create, :destroy]
 
   def index
+    @listings = Listing.where(closed: false)
   end
 
   def show

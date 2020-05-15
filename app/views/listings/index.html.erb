@@ -1,0 +1,5 @@
+<div class="row justify-content-around">
+  <% @listings.each do |listing| %>
+    <%= render 'card', listing: listing %>
+  <% end %>
+</div>

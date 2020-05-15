@@ -1,0 +1,16 @@
+<%= link_to listing, class:"text-decoration-none text-dark" do %>
+<div class="card mb-3" style="max-width: 540px; width: 60vw; height: 20vh ">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="..." class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= listing.title %></h5>
+        <p class="card-text"><%= listing.description %></p>
+        <p class="card-text"><small class="text-muted"><%= listing.created_at %></small></p>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
