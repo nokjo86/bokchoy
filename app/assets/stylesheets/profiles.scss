@@ -1,3 +1,10 @@
-// Place all the styles related to the Profiles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: https://sass-lang.com/
+.profile_page {
+  display: flex;  
+}
+
+.user_card{
+  border: purple solid 1px;
+  padding: 1%;
+  margin: 1%;
+
+}

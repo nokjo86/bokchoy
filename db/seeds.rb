@@ -40,12 +40,12 @@ end
 
 i = 0
 listings.each do |listing|
-  listing.picture.attach(
+  listing.image.attach(
     io: File.open("app/assets/images/#{i}.jpg"),
-    filename: "test#{i}.jpg",
+    filename: "#{i}.jpg",
     content_type: "image/jpg"
   )
-  i += 0
+  i += 1
 end
 
 puts listings

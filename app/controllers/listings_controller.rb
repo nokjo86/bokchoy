@@ -2,6 +2,7 @@ class ListingsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   before_action :set_profile, only: [:create, :destroy]
+  authorize_resource
 
   def index
     @listings = Listing.where(closed: false)

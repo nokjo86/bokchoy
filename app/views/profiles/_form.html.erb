@@ -1,32 +1,51 @@
 <%= render "shared/form-errors", resource: profile %>
 <%= form_with model: profile, local: true, class: "profile-form" do |form| %>
-<div>
-  <%= form.label :first_name %>
-  <%= form.text_field :first_name %>
+
+<div class="form-group row">
+  <%= form.label :first_name, class: "col-sm-2 col-form-label" %>
+  <div class="col-sm-10">
+    <%= form.text_field :first_name, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :last_name %>
-  <%= form.text_field :last_name %>
+<div class="form-group row">
+  <%= form.label :last_name, class: "col-sm-2 col-form-label" %>
+  <div class="col-sm-10">
+    <%= form.text_field :last_name, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :address_line_1 %> 
-  <%= form.text_field :address_line1 %>
+<div class="form-group row">
+  <%= form.label :address_line_1, class: "col-sm-2 col-form-label" %> 
+  <div class="col-sm-10">
+    <%= form.text_field :address_line1, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :address_line_2 %> 
-  <%= form.text_field :address_line2 %>
+<div class="form-group row">
+  <%= form.label :address_line_2, class: "col-sm-2 col-form-label" %> 
+<div class="col-sm-10">
+  <%= form.text_field :address_line2, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :suburb %> 
-  <%= form.text_field :suburb %>
+<div class="form-group row">
+  <%= form.label :suburb, class: "col-sm-2 col-form-label" %> 
+<div class="col-sm-10">
+    <%= form.text_field :suburb, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :postcode %> 
-  <%= form.text_field :postcode %>
+<div class="form-group row">
+  <%= form.label :postcode, class: "col-sm-2 col-form-label" %> 
+<div class="col-sm-10">
+  <%= form.text_field :postcode, class: "form-control" %>
+  </div>  
 </div>
-<div>
-  <%= form.label :state %> 
-  <%= form.text_field :state %>
+<div class="form-group row">
+  <%= form.label :state, class: "col-sm-2 col-form-label" %> 
+ <div class="col-sm-10">
+  <%= form.text_field :state, class: "form-control" %>
+  </div>  
 </div>
-  <%= form.submit %>
+<div class="form-group row">
+  <div class="col-sm-10">
+    <%= form.submit class: "btn btn-success" %>
+  </div>
+</div>
 <% end %>

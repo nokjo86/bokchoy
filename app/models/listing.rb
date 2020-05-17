@@ -1,7 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :profile, optional: true
   belongs_to :product
-  has_one_attached :picture
+  has_one_attached :image
 
 
   enum delivery: { "Local Pickup": 1, "Delivery": 2, "Both": 3 }
