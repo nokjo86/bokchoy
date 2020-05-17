@@ -1,7 +1,9 @@
-<div class="profile_page">
-<%= render 'user_card', profile: @profile %>
+<div class="container">
+  <div class="profile_page">
+  <%= render 'user_card', profile: @profile %>
 
-<% @listings.each do |listing| %>
-<%= render 'shared/card', listing: listing %>
-<% end %>
+  <% @listings.each do |listing| %>
+  <%= render 'shared/card', listing: listing %>
+  <% end %>
+  </div>
 </div>

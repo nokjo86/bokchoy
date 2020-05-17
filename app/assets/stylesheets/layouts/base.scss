@@ -1,10 +1,8 @@
-
-// .container {
-//   border: 1px solid blue;
-//   padding: 0px 10px;
-//   max-width: 75vw;
-//   display: flex;
-//   flex-direction: column;
+.coverbox {
+  margin: 0px!important;
+  padding: 0px!important;
+  box-sizing: border-box!important;
+}
 
 a, a:hover, a:focus {
     text-decoration: none;
