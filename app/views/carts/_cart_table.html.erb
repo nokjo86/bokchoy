@@ -1,0 +1,41 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% total = 0%>
+      <th scope="row">1</th>
+      <% cart.each do |item| %>
+      <td><%= link_to item.title, listing_path(item.id) %></td>
+      <%= form_with model: relationship(item), local: true, method: :put do |form| %>
+        <td><%= form.number_field :quantity, size: "3", step: 1 %>
+            <%= form.hidden_field :listing_id, value: item.id %>
+            <%= form.submit "Edit" %>
+            <% end %>
+        </td>
+      <td><% subtotal = relationship(item).quantity * item.price %>
+          <%= "$""%.2f" % subtotal%>
+      </td>
+      <% total += subtotal %>
+      <td>
+        <%= button_to "Delete", relationship(item), method: :delete %>
+      </td>
+      <% end %>
+    </tr>
+    <tr class="data-total-rows table-success">
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td><strong><%= "$""%.2f" % total %></strong></td>
+      <td></td>
+
+    </tr>
+    </tbody>
+</table>

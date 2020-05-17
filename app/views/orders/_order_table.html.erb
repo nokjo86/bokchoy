@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+    <tr class= "table-success">
+      <th scope="col">#</th>
+      <th scope="col">Date of Purchase</th>
+      <th scope="col">Amount Paid</th>
+      <th scope="col">Method</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <% @orders.each do |order| %>
+        <td><%= order.created_at.to_formatted_s(:long) %></td>
+        <td><%= "$""%.2f" % order.total_amount_paid %></td>
+        <td><%= order.delivery %></td>
+        <td><%= link_to "View details", order_path(order.id) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

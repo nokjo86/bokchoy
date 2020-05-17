@@ -1,26 +1,16 @@
 <h1>Shopping basket</h1>
 <% if @cart.length > 0 %>
-  <% total = 0%>
-  <% @cart.each do |item| %>
-  <%= link_to item.title, listing_path(item.id) %>
-    <%= form_with model: relationship(item), local: true, method: :put do |form| %>
-      <%= form.number_field :quantity, size: "1", step: 1 %>
-      <%= form.hidden_field :listing_id, value: item.id %>
-      <%= form.submit "Edit" %>
-    <% end %>
-      <% subtotal = relationship(item).quantity * item.price %>
-      <%= "$""%.2f" % subtotal%>
-      <% total += subtotal %>
-    <%= button_to "Delete", relationship(item), method: :delete %>
-  <% end %>
-  <%= "$""%.2f" % total %>
+<%= render "cart_table", cart: @cart %>
+<div>
   <input type="radio" id="delivery" value=1 checked>
-  <label for="male">Local Pickup</label><br>
+  <label for="male">Local Pickup</label>
   <input type="radio" id="delivery" value=2>
   <label for="female">Delivery</label><br>
+</div>
   <%# <% hidden_field_tag 'seller', item.profile.id %>
-  <%= link_to "Pay Deposit", "", id: "stripe" %>  
-
+<div>
+  <%= link_to "Pay Now", "", id: "stripe", class: "btn btn-success float-right" %>  
+</div>
 <% else %>
 <%= "Your veggie box is currently empty, start shopping now" %>
 <% end %>

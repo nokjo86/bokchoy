@@ -1,8 +1,28 @@
-<h1>Orders</h1>
-<%= @order.created_at.to_formatted_s(:long) %>
-<% @order_items.each do |item| %>
-  <% listing = Listing.find(item.listing_id) %>
-  <%= link_to listing.title, listing_path(listing.id) %>
-  <%= item.quantity %>
-  <%= "$""%.2f" % @order.total_amount_paid %>
-<% end %>
+<h1>Order details</h1>
+<p class = "text-muted font-italic"><%= @order.created_at.to_formatted_s(:long) %></p>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Seller</th>
+    </tr>
+  </thead>
+
+
+
+  <tbody>
+    <tr>
+      <% @order_items.each do |item| %>
+      <% listing = Listing.find(item.listing_id) %>
+      <td><%= link_to listing.title, listing_path(listing.id) %></td> 
+      <td><%= item.quantity %></td>
+      <td><%= "$""%.2f" % listing.price %></td>
+      <td><%= link_to Profile.find(listing.profile_id).user.username, profile_path(listing.profile_id) %></td>
+      <% end %>
+
+    </tr>
+
+  </tbody>
+</table>
