@@ -1,9 +1,12 @@
 <div class="container">
-  <div class="profile_page">
-  <%= render 'user_card', profile: @profile %>
-
-  <% @listings.each do |listing| %>
-  <%= render 'shared/card', listing: listing %>
-  <% end %>
+  <div class="profile_container">
+    <div>
+      <%= render 'user_card', profile: @profile %>
+    </div>
+    <div class="container">
+      <% @listings.each do |listing| %>
+        <%= render 'shared/card', listing: listing %>
+      <% end %>
+    </div>
   </div>
 </div>

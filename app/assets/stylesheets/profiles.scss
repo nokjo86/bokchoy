@@ -1,10 +1,19 @@
-.profile_page {
+.profile_container {
   display: flex;  
+  border: 1px solid black;
 }
 
 .user_card{
-  border: purple solid 1px;
-  padding: 1%;
-  margin: 1%;
+  width: 20vw;
+  border: forestgreen solid 2px;
+  margin-right: 2%;
+  padding: 1% 4% 1% 4%;
+}
 
+.user_card p{
+  margin-bottom: 0;
+}
+
+.user_card_button {
+  margin-top: 10px;
 }
