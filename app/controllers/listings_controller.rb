@@ -5,14 +5,14 @@ class ListingsController < ApplicationController
   authorize_resource
 
   def index
-    if params[:filter]
+    if params[:search]
+      @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%")
+      check_nil?
+    elsif params[:filter]
       @listings = Listing.where(product_id: params[:filter])
-      if @listings.length < 1
-        flash.now[:alert] = "No matching result found"
-        @listings = Listing.where(closed: false)
-      end
+      check_nil?
     else
-    @listings = Listing.where(closed: false)
+      @listings = Listing.where(closed: false)
     end
   end
 
@@ -57,5 +57,12 @@ class ListingsController < ApplicationController
 
   def listing_params
   params.require(:listing).permit(:title, :description, :price, :picture, :delivery)
+  end
+
+  def check_nil?
+    if @listings.length < 1
+      flash.now[:alert] = "No matching result found"
+      @listings = Listing.where(closed: false)
+    end
   end
 end
