@@ -5,13 +5,30 @@ class ListingsController < ApplicationController
   authorize_resource
 
   def index
+    ## If user using the search title function
     if params[:search]
       @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%")
       check_nil?
-    elsif params[:filter]
-      @listings = Listing.where(product_id: params[:filter])
+    ## If there is a geolocation stored in the cookie
+    elsif cookies[:lat_lon]
+      ## Convert cookies back to an array
+      user_location = JSON.parse cookies[:lat_lon]
+      ## Search any user near the user_location and only return profile id
+      nearby_user = Profile.near(user_location, 20).reorder('').pluck(:id)
+      ## Search and returns listings with an array of profile id
+      @listings = Listing.where(profile_id: nearby_user, closed: false)
       check_nil?
-    else
+      ## if there is geolocation stored and user used the filter function
+      if params[:filter]
+        ## alter @listings with filter
+        @listings = @listings.where(product_id: params[:filter])
+        check_nil?
+      end
+    ## User uses the filter function without storing location details
+    elsif params[:filter]
+     @listings = @listings.where(product_id: params[:filter])
+        check_nil?
+    else 
       @listings = Listing.where(closed: false)
     end
   end

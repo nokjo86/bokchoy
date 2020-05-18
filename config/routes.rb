@@ -17,5 +17,5 @@ Rails.application.routes.draw do
   post "/payments/webhook", to: "payments#webhook"
   get "/payments/success", to: "payments#success"
   resources :orders, only: [:index, :show]
-
+  post "/set_location", to: "pages#set_location"
 end
