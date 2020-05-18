@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Messages</h1>
+  <% if @messages.length > 0 %>
+  <%= render 'message_table', messages: @messages %>
+
+    <% else %>
+      <%= "No record found" %>
+    <% end %>
+</div>

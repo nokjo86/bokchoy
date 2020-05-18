@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2020_05_18_135430) do
   create_table "messages", force: :cascade do |t|
     t.bigint "sender_id"
     t.bigint "recipient_id"
-    t.bigint "listing_id", null: false
+    t.bigint "listing_id"
     t.text "body"
     t.boolean "closed", default: false
     t.bigint "thread_id"

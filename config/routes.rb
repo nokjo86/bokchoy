@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :listings
   get 'cart', to: 'carts#show'
   resources :cart_items
+  resources :messages
   get "/payments/session", to: "payments#get_stripe_id"
   post "/payments/webhook", to: "payments#webhook"
   get "/payments/success", to: "payments#success"

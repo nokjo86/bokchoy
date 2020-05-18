@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      redirect_to session[:back_path]
+      session[:back_path] == nil ? (redirect_to root_url) : (redirect_to session[:back_path])
     else
       render :edit
     end

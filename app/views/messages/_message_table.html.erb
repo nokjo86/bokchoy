@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr class= "table-success">
+      <th scope="col">Created at</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Recipient</th>
+      <th scope="col">Body</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% messages.each do |message| %>
+      <tr>
+        <td><%= message.created_at.to_formatted_s(:long) %></td>
+        <td><%= Profile.find(message.sender_id).user.username %></td>
+        <td><%= Profile.find(message.recipient_id).user.username %></td>
+        <td><%= message.body %></td>
+        <td><p><%= link_to "Conversation", message_path(message.id) %> | 
+        <%= link_to "View listing", listing_path(message.listing_id) %></p></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
