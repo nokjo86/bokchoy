@@ -1,10 +1,15 @@
 <% if flash[:alert] %>
   <p class="alert alert-danger"><%= flash[:alert] %></p>
 <% end %>
-<div class="container">
-  <div class="listings">
-    <% @listings.each do |listing| %>
-      <%= render 'shared/card', listing: listing %>
-    <% end %>
+
+  <div class="listing_container">
+    <%= render "sidebar"%>
+    <div class="container">
+      <div class="listings">
+        <% @listings.each do |listing| %>
+          <%= render 'shared/card', listing: listing %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
+<div class="placeholder"></div>
