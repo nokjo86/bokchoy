@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_015411) do
+ActiveRecord::Schema.define(version: 2020_05_18_135430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 2020_05_15_015411) do
     t.bigint "product_id", null: false
     t.index ["product_id"], name: "index_listings_on_product_id"
     t.index ["profile_id"], name: "index_listings_on_profile_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.bigint "listing_id", null: false
+    t.text "body"
+    t.boolean "closed", default: false
+    t.bigint "thread_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["listing_id"], name: "index_messages_on_listing_id"
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id"
+    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index ["thread_id"], name: "index_messages_on_thread_id"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -132,6 +147,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_015411) do
   add_foreign_key "carts", "profiles"
   add_foreign_key "listings", "products"
   add_foreign_key "listings", "profiles"
+  add_foreign_key "messages", "listings"
   add_foreign_key "order_items", "listings"
   add_foreign_key "order_items", "orders"
   add_foreign_key "orders", "profiles"
