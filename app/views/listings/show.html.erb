@@ -1,7 +1,7 @@
+<% if flash[:success] %>
+    <p class="alert alert-success"><%= flash[:success] %></p>
+<% end %>
 <div class="container">
-  <% if flash[:success] %>
-    <p><%= flash[:success] %></p>
-  <% end %>
   <%= render "listing_template", listing: @listing%>
 </div>
 

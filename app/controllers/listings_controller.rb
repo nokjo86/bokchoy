@@ -37,6 +37,7 @@ class ListingsController < ApplicationController
   end
 
   def new
+    profile_blank?
     @listing = Listing.new
   end
 
@@ -73,7 +74,7 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-  params.require(:listing).permit(:title, :description, :price, :picture, :delivery)
+  params.require(:listing).permit(:title, :description, :price, :image, :delivery, :product_id)
   end
 
   def check_nil?

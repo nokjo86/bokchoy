@@ -1,3 +1,6 @@
+<% if flash[:alert] %>
+  <p class="alert alert-danger"><%= flash[:alert] %></p>
+<% end %>
 <div class="container">
   <h2><%= "Edit user details for #{@profile.user.username}" %></h2>
   <%= render "form", profile: @profile %>

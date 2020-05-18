@@ -13,7 +13,11 @@
     </div>
     <div>
       <strong>Location:  </strong>
-      <span><%= "geo come in" %></span>
+      <span><%= item_location(listing) %></span>
+    </div>
+    <div>
+      <strong>Pickup/Delivery:  </strong>
+      <span><%= listing.delivery %></span>
     </div>
     <div>
       <strong>Price:  </strong>
