@@ -3,10 +3,10 @@
   <% if @cart.length > 0 %>
   <%= render "cart_table", cart: @cart %>
   <div>
-    <input type="radio" id="delivery" value=1 checked>
-    <label for="male">Local Pickup</label>
-    <input type="radio" id="delivery" value=2>
-    <label for="female">Delivery</label><br>
+    <input type="radio" name="delivery" id="pickup" value=1 checked >
+    <label for="pickup">Local Pickup</label>
+    <input type="radio" name="delivery" id="delivery" value=2>
+    <label for="delivery">Delivery</label><br>
   </div>
     <%# <% hidden_field_tag 'seller', item.profile.id %>
   <div>

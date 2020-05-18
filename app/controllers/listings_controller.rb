@@ -5,7 +5,15 @@ class ListingsController < ApplicationController
   authorize_resource
 
   def index
+    if params[:filter]
+      @listings = Listing.where(product_id: params[:filter])
+      if @listings.length < 1
+        flash.now[:alert] = "No matching result found"
+        @listings = Listing.where(closed: false)
+      end
+    else
     @listings = Listing.where(closed: false)
+    end
   end
 
   def show

@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:webhook]
   def get_stripe_id
     cart_items = current_user.profile.cart.cart_items
     list_of_items = []
@@ -22,7 +23,9 @@ class PaymentsController < ApplicationController
       line_items: list_of_items,
       payment_intent_data: {
         metadata: {
-          user_id: current_user.id
+          user_id: current_user.id,
+          delivery: params[:delivery],
+          total: total
         }
       },
       success_url: "#{root_url}payments/success?method=#{params[:delivery]}&amount=#{total}",
@@ -31,12 +34,18 @@ class PaymentsController < ApplicationController
     render :json => {id: session_id, stripe_public_key: Rails.application.credentials.dig(:stripe, :public_key)}
   end
 
-  def success
-    order = current_user.profile.orders.create(
-      delivery: params[:method].to_i,
-      total_amount_paid: params[:amount]
+  def webhook
+    if params[:type] == "checkout.session.completed"
+    payment_id= params[:data][:object][:payment_intent]
+    payment = Stripe::PaymentIntent.retrieve(payment_id)
+    user_id = payment.metadata.user_id
+
+    user = User.find(user_id)
+    order = user.profile.orders.create(
+      delivery: payment.metadata.delivery.to_i,
+      total_amount_paid: payment.metadata.total.to_f.round(2)
     )
-    cart_items = current_user.profile.cart.cart_items
+    cart_items = user.profile.cart.cart_items
     cart_items.each do |item|
       OrderItem.create(
         order_id: order.id,
@@ -44,6 +53,12 @@ class PaymentsController < ApplicationController
         quantity: item.quantity
       )
     end
-    current_user.profile.cart.listings.delete_all
+    user.profile.cart.listings.delete_all
+    end
+  head 200
+  end
+
+  def success
+
   end
 end

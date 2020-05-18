@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'cart', to: 'carts#show'
   resources :cart_items
   get "/payments/session", to: "payments#get_stripe_id"
+  post "/payments/webhook", to: "payments#webhook"
   get "/payments/success", to: "payments#success"
   resources :orders, only: [:index, :show]
 

@@ -13,23 +13,35 @@
   </div>
 </div>
 <div class="card-deck">
+  <%= link_to listings_path(filter: 1) do %>
   <div class="card" >
     <img src="assets/veggie.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
+  <%= link_to listings_path(filter: 2) do %>
   <div class="card" >
     <img src="assets/fruits.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
+  <%= link_to listings_path(filter: 3) do %>
   <div class="card" >
     <img src="assets/herbs.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
+  <%= link_to listings_path(filter: 4) do %>
   <div class="card" >
     <img src="assets/eggs.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
+  <%= link_to listings_path(filter: 5) do %>
   <div class="card" >
     <img src="assets/mushrooms.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
+  <%= link_to listings_path(filter: 6) do %>
   <div class="card" >
     <img src="assets/honey.png" class="card-img-top" alt="..."style="width:13vw">
   </div>
+  <% end %>
 </div>
 <div class="placeholder"></div>
