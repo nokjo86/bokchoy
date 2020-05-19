@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   get "/payments/success", to: "payments#success"
   resources :orders, only: [:index, :show]
   post "/set_location", to: "pages#set_location"
+  get "/remove_location", to: "pages#remove_location"
 end

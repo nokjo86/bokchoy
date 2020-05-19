@@ -3,8 +3,8 @@ require_relative "data/user_details"
 
 products = [
   "Vegetables",
-  "Herbs",
   "Fruits",
+  "Herbs",
   "Eggs",
   "Honey",
   "Mushrooms"
@@ -12,11 +12,10 @@ products = [
 
 listings = [
     "Tomato",
-    "Basil",
     "Orange",
+    "Basil",
     "Chicken eggs",
     "Honeycomb",
-    "Basil",
     "Mushrooms"
   ]
 puts "*" * 30

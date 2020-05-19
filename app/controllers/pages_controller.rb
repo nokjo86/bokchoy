@@ -10,8 +10,8 @@ class PagesController < ApplicationController
   end
 
     def remove_location
-    cookies[:lat_lon] = nil
-    redirect_to listings_url
+    cookies.delete :lat_lon
+    redirect_to request.referer
   end
   
 end
