@@ -26,7 +26,7 @@ class ListingsController < ApplicationController
       end
     ## User uses the filter function without storing location details
     elsif params[:filter]
-     @listings = @listings.where(product_id: params[:filter])
+     @listings = Listing.where(product_id: params[:filter])
         check_nil?
     else 
       @listings = Listing.where(closed: false)

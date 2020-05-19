@@ -8,4 +8,10 @@ class PagesController < ApplicationController
     cookies[:lat_lon] = JSON.generate(Geocoder.search("#{params[:address]}").first.coordinates)
     redirect_to listings_url
   end
+
+    def remove_location
+    cookies[:lat_lon] = nil
+    redirect_to listings_url
+  end
+  
 end
