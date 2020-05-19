@@ -14,8 +14,8 @@
       <tr>
         <th scope="row">1</th>
         <td><%= link_to item.title, listing_path(item.id) %></td>
-        <%= form_with model: relationship(item), local: true, method: :put do |form| %>
-          <td><%= form.number_field :quantity, size: "3", step: 1 %>
+        <td><%= form_with model: relationship(item), local: true, method: :put do |form| %>
+              <%= form.number_field :quantity, size: "3", step: 1 %>
               <%= form.hidden_field :listing_id, value: item.id %>
               <%= form.submit "Edit" %>
               <% end %>
