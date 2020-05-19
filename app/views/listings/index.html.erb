@@ -1,9 +1,4 @@
-<% if flash[:alert] %>
-  <p class="alert alert-danger"><%= flash[:alert] %></p>
-<% end %>
-<% if flash[:success] %>
-  <p class="alert alert-success"><%= flash[:success] %></p>
-<% end %>
+<%= render 'shared/flash'%>
   <div class="listing_container">
     <%= render "sidebar"%>
     <div class="container">

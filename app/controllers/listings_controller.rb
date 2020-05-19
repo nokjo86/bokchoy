@@ -7,7 +7,7 @@ class ListingsController < ApplicationController
   def index
     ## If user using the search title function
     if params[:search]
-      @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%")
+      @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%").where(closed: false)
       check_nil?
     ## If there is a geolocation stored in the cookie
     elsif cookies[:lat_lon]
@@ -21,12 +21,12 @@ class ListingsController < ApplicationController
       ## if there is geolocation stored and user used the filter function
       if params[:filter]
         ## alter @listings with filter
-        @listings = @listings.where(product_id: params[:filter])
+        @listings = @listings.where(product_id: params[:filter], closed: false)
         check_nil?
       end
     ## User uses the filter function without storing location details
     elsif params[:filter]
-     @listings = Listing.where(product_id: params[:filter])
+     @listings = Listing.where(product_id: params[:filter], closed: false)
         check_nil?
     else 
       @listings = Listing.where(closed: false)
@@ -63,8 +63,17 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    @listing.destroy
+    if @listing.carts == nil
+      @listing.destroy
+      flash[:success] = "Listing deleted successfully" 
+    else 
+      @listing.closed = true
+      if @listing.save
+        flash[:alert] = "Listing cannot be deleted but is now closed" 
+      end
+    end
     redirect_to profile_path(@profile.id)
+
   end
 
   private

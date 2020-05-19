@@ -24,7 +24,7 @@
       <span><%= "$""%.2f" % listing.price %></span>
     </div>
 
-    <% unless account_owner?(listing) %>
+    <% unless account_owner?(listing) || listing.closed == true%>
       <%= form_with model: CartItem.new, local: true, method: :post do |form| %>
         <%= form.number_field :quantity, size: "4", step: 1, value: 1, min: 1, max: 100 %>
         <%= form.hidden_field :listing_id, value: @listing.id %>
@@ -33,10 +33,9 @@
           <span><%= flash[:bought] %></span>
       <% end %>
     <% end %>
-
     <p><%= listing.description %></p>
     <%= link_to 'Back', listings_path, class: 'btn btn-success' %> 
-     <% if can? :manage, @listing %>
+     <% if (can? :manage, @listing) && (listing.closed == false) %>
       <%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-info' %>
       <%= link_to "Delete", listing_path(@listing), method: :delete, class: "btn btn-danger", data: { confirm: "Really delete #{@listing.title}?"} %>
     <% end %>

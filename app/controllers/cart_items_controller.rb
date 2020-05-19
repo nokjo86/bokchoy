@@ -12,6 +12,7 @@ before_action :check_existed?, except: [:create, :destroy]
     end
     check_existed?
     flash[:bought] = "#{ActionController::Base.helpers.pluralize(@existing_item.quantity, 'item')} in basket"
+    flash[:success] = "Item added"
     redirect_to request.referer
   end
 
