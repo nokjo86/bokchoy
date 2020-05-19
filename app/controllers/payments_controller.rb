@@ -65,5 +65,7 @@ class PaymentsController < ApplicationController
   end
 
   def success
+    flash[:success] = "Payment completed. You can view your order from order history. Please contact the seller to organise delivery/pickup."
+    redirect_to listings_path
   end
 end
