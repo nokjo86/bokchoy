@@ -1,0 +1,28 @@
+<table class="table">
+  <thead>
+    <tr class= "table">
+      <th scope="col">Sent at</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Recipient</th>
+      <th scope="col">Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% messages.each do |message| %>
+      <tr>
+        <td><%= message.created_at.to_formatted_s(:long) %></td>
+        <td><%= Profile.find(message.sender_id).user.username %></td>
+        <td><%= Profile.find(message.recipient_id).user.username %></td>
+        <td><%= message.body %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= form_with model: Message.new, local: true, method: :post do |form| %>
+<div class="form-group">
+  <%= form.label :body %>
+  <%= form.text_area :body, class: "form-control" %>
+</div>
+<%= form.hidden_field :thread_id, value: messages.first.id %>
+<%= form.submit class: "btn btn-success" %>
+<% end %>

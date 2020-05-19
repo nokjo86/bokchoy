@@ -52,6 +52,12 @@ class PaymentsController < ApplicationController
         listing_id: item.listing_id,
         quantity: item.quantity
       )
+      Message.create(
+        listing_id: item.listing_id,
+        sender_id: user.profile.id,
+        recipient_id: Listing.find(item.listing_id).profile_id,
+        body: "Payment has been made for the item"
+      )
     end
     user.profile.cart.listings.delete_all
     end
@@ -59,6 +65,5 @@ class PaymentsController < ApplicationController
   end
 
   def success
-
   end
 end
