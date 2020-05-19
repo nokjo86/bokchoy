@@ -4,7 +4,13 @@ module PagesHelper
     if cookies[:lat_lon]
       geocode = JSON.parse cookies[:lat_lon]
       location = Geocoder.search(geocode).first
-      location.suburb + ", " + location.state
+      suburb = location.suburb
+      state = location.state
+      if suburb == nil
+        return state
+      else
+        suburb + ", " + state
+      end
     end
   end
 end

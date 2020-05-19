@@ -5,8 +5,15 @@ class PagesController < ApplicationController
   
   ## Function to store user location to cookie
   def set_location
-    cookies[:lat_lon] = JSON.generate(Geocoder.search("#{params[:address]}").first.coordinates)
-    redirect_to listings_url
+    rawdata = Geocoder.search("#{params[:address]}")
+    if rawdata == []
+      cookies.delete :lat_lon
+      flash[:alert] = "Oops. I couldn't recognise this address. Please check."
+    else
+    rawdata = rawdata.first.coordinates
+      cookies[:lat_lon] = JSON.generate(rawdata)
+    end
+      redirect_to listings_url
   end
 
     def remove_location

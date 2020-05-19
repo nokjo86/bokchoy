@@ -10,9 +10,6 @@
         <th scope="col">Seller</th>
       </tr>
     </thead>
-
-
-
     <tbody>
       <% @order_items.each do |item| %>
       <tr>
@@ -23,8 +20,7 @@
         <td><%= link_to Profile.find(listing.profile_id).user.username, profile_path(listing.profile_id) %></td>
       </tr>
       <% end %>
-
-
     </tbody>
   </table>
 </div>
+<div class="placeholder"></div>

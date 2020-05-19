@@ -63,7 +63,7 @@ class ListingsController < ApplicationController
   end
 
   def destroy
-    if @listing.carts == nil
+    if @listing.carts.length == 0
       @listing.destroy
       flash[:success] = "Listing deleted successfully" 
     else 
