@@ -7,6 +7,7 @@ class ListingsController < ApplicationController
   def index
     ## If user using the search title function
     if params[:search]
+      ## searches listings table and selects listing if listing matches the search keyword and is not closed
       @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%").where(closed: false)
       check_nil?
     ## If there is a geolocation stored in the cookie
@@ -83,7 +84,7 @@ class ListingsController < ApplicationController
   end
 
   def listing_params
-  params.require(:listing).permit(:title, :description, :price, :image, :delivery, :product_id)
+    params.require(:listing).permit(:title, :description, :price, :image, :delivery, :product_id)
   end
 
   def check_nil?
