@@ -70,4 +70,6 @@ end
 puts "#{User.all.length} user record/s created."
 puts "#{Profile.all.length} profile record/s created."
 puts "#{Listing.all.length} listing record/s created."
-
+puts "*" * 30
+puts "Please db:reset, if no listing created"
+puts "*" * 30
