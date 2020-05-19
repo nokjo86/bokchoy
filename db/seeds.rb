@@ -19,9 +19,10 @@ listings = [
     "Basil",
     "Mushrooms"
   ]
+puts "*" * 30
+puts "db:reset is required"
+puts "*" * 30
 
-puts "All #{User.all.length} user record/s deleted"
-User.destroy_all
 
 ## Create product type list
 products.each do |product|
@@ -66,7 +67,7 @@ sellers.each do |seller|
   end
 end
 
-
-puts listings
 puts "#{User.all.length} user record/s created."
+puts "#{Profile.all.length} profile record/s created."
+puts "#{Listing.all.length} listing record/s created."
 
