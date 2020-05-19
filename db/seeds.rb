@@ -1,4 +1,5 @@
 require_relative "data/users"
+require_relative "data/user_details"
 
 products = [
   "Vegetables",
@@ -10,43 +11,61 @@ products = [
 ]
 
 listings = [
-    "Yummy Tomato for sale",
-    "Green Bokchoy fresh from yard",
-    "Best batch ever beets"
+    "Tomato",
+    "Basil",
+    "Orange",
+    "Chicken eggs",
+    "Honeycomb",
+    "Basil",
+    "Mushrooms"
   ]
 
 puts "All #{User.all.length} user record/s deleted"
 User.destroy_all
 
+## Create product type list
 products.each do |product|
   Product.create(
     name: product
   )
 end
 
-i = 0
+## Create users and auto create blank profiles
 users.each do |user|
   seller = User.create(user)
-  listing = seller.profile.listings.create(
-    title: listings[i],
-    description: Faker::Lorem.sentences(number: 3).join(" "),
-    price: rand(0.01..5.00).round(2),
-    delivery: rand(1..3),
-    product_id: 1
-  )
-  listings[i] = listing
+end
+
+## Update profiles
+profiles = Profile.all
+i = 0
+profiles.each do |profile|
+  profile.update(user_details[i])
   i += 1
 end
 
-i = 0
-listings.each do |listing|
-  listing.image.attach(
-    io: File.open("app/assets/images/#{i}.jpg"),
-    filename: "#{i}.jpg",
+sellers = Profile.joins(:user).where(users: { admin: false})
+
+sellers.each do |seller|
+  (1..6).each do |i|
+    seller.listings.create(
+      title: listings[i-1] + " " + seller.id.to_s,
+      description: Faker::Lorem.sentences(number: 4).join(" "),
+      price: rand(0.01..5.00).round(2),
+      delivery: rand(1..3),
+      product_id: i
+    )
+  end
+  i = 0
+  seller.listings.each do |listing|
+    listing.image.attach(
+    io: File.open("app/assets/images/p#{i}.jpeg"),
+    filename: "p#{i}.jpeg",
     content_type: "image/jpg"
-  )
-  i += 1
+    )
+    i += 1
+  end
 end
+
 
 puts listings
 puts "#{User.all.length} user record/s created."

@@ -15,6 +15,21 @@ def users
       username: "test2",
       email: "test2@bokchoy.com",
       password: "password",
-    }
+    },
+    {
+      username: "test3",
+      email: "test3@bokchoy.com",
+      password: "password",
+    },
+    {
+      username: "test4",
+      email: "test4@bokchoy.com",
+      password: "password",
+    },
+    {
+      username: "test5",
+      email: "test5@bokchoy.com",
+      password: "password",
+    },
   ]
 end
