@@ -1,4 +1,5 @@
 <%= render 'shared/flash'%>
+<%= render 'shared/form_errors', resource: @profile %>
 <div class="container">
   <h2><%= "Edit user details for #{@profile.user.username}" %></h2>
   <%= render "form", profile: @profile %>
