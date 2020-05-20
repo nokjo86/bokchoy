@@ -3,8 +3,8 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: :show
 
   def show
-    @profile = Profile.find(params[:id])
-    @listings = Listing.where(profile_id: params[:id])
+    ## Loads user profile from the profiles table with its associated listings and pre-load all image records associated to the listing
+    @profile = Profile.includes(listings: {image_attachment: :blob}).find(params[:id])
   end
 
   def edit

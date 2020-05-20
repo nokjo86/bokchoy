@@ -2,7 +2,7 @@
 <div class="card mb-3" style="max-width: 70vw;">
   <div class="row no-gutters">
     <div class="col-md-4" id="listing_img">
-      <%= image_tag url_for(listing.image) , alt: "#{listing.title} image", class: "card-img img-fluid"%>
+      <%= image_tag url_for(img_for(listing)) , alt: "#{listing.title} image", class: "card-img img-fluid"%>
     </div>
     <div class="col-md-8">
       <div class="card-body">

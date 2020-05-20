@@ -5,7 +5,7 @@
       <%= render 'user_card', profile: @profile %>
     </div>
     <div class="container">
-      <% @listings.each do |listing| %>
+      <% @profile.listings.each do |listing| %>
         <%= render 'shared/card', listing: listing %>
       <% end %>
     </div>

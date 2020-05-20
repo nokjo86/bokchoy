@@ -7,6 +7,7 @@ before_action :set_profile
 
   def show
     @order = Order.find(params[:id])
-    @order_items = OrderItem.where(order_id: params[:id])
+    ## Find an array of order_items with the corresponding listing details and the profile/user information linked to listing. Preloading associated tables in this step can minimize the query call when accessing the listing title and listing owner username in the view model.
+    @order_items = OrderItem.includes(listing: {profile: :user}).where(order_id: params[:id])
   end
 end

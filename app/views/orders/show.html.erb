@@ -12,12 +12,12 @@
     </thead>
     <tbody>
       <% @order_items.each do |item| %>
+      <% listing = item.listing %>
       <tr>
-        <% listing = Listing.find(item.listing_id) %>
-        <td><%= link_to listing.title, listing_path(listing.id) %></td> 
+        <td><%= link_to item.listing.title, listing_path(listing.id) %></td> 
         <td><%= item.quantity %></td>
         <td><%= "$""%.2f" % listing.price %></td>
-        <td><%= link_to Profile.find(listing.profile_id).user.username, profile_path(listing.profile_id) %></td>
+        <td><%= link_to listing.profile.user.username, profile_path(listing.profile_id) %></td>
       </tr>
       <% end %>
     </tbody>

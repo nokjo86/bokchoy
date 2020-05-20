@@ -1,14 +1,19 @@
 class MessagesController < ApplicationController
 before_action :set_profile
   def index
-    ## searches table and selects record which doesn't contain parent_id (thread_id) and sender_id or recipient_id matches current user id
-    @messages = Message.where(thread_id: nil).where(["sender_id = ? OR recipient_id = ?", @profile.id, @profile.id])
+    ## Searches the messages table and selects record which doesn't contain parent_id (thread_id) & sender_id or recipient_id matches current user id.
+
+    ## Load the associated user details to minimize queries (calling /finding individual profile > user > username) run for accessing username in the view. 
+
+    @messages = Message.includes({sender: :user},{recipient: :user}).where(thread_id: nil).where(["sender_id = ? OR recipient_id = ?", @profile.id, @profile.id])
   end
 
   def show
-    ## searches table and returns records contain parent_id (thread_id) in a specific order.
+    ## Searches the messages table and returns record contains parent_id (thread_id) in a specific order.
     message_threads = Message.where(thread_id: params[:id]).order(created_at: :asc)
+    ## Find the original message (the parent)
     @messages = [Message.find(params[:id])]
+    ## Add message and message threads if message thread is not nil
     @messages += message_threads unless message_threads == nil
   end
 

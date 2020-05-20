@@ -11,8 +11,8 @@
     <% messages.each do |message| %>
       <tr>
         <td><%= message.created_at.to_formatted_s(:long) %></td>
-        <td><%= Profile.find(message.sender_id).user.username %></td>
-        <td><%= Profile.find(message.recipient_id).user.username %></td>
+        <td><%= message.sender.user.username %></td>
+        <td><%= message.recipient.user.username %></td>
         <td><%= message.body %></td>
       </tr>
     <% end %>

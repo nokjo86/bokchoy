@@ -7,17 +7,19 @@ class ListingsController < ApplicationController
   def index
     ## If user using the search title function
     if params[:search]
-      ## searches listings table and selects listing if listing matches the search keyword and is not closed
-      @listings = Listing.where("lower(title) LIKE ?","%#{params[:search].downcase}%").where(closed: false)
+      ## Searches listings table and selects listing if listing matches the search keyword and is not closed
+      ## Includes image record for the selected record
+      @listings = Listing.with_attached_image.where("lower(title) LIKE ?","%#{params[:search].downcase}%").where(closed: false)
       check_nil?
     ## If there is a geolocation stored in the cookie
     elsif cookies[:lat_lon]
       ## Convert cookies back to an array
       user_location = JSON.parse cookies[:lat_lon]
-      ## Search any user near the user_location and only return profile id
+      ## Searches any user near the user_location and only return profile id
       nearby_user = Profile.near(user_location, 20).reorder('').pluck(:id)
-      ## Search and returns listings with an array of profile id
-      @listings = Listing.where(profile_id: nearby_user, closed: false)
+      ## Searches and returns listings if profile id matches the array of id
+      ## Includes image record for the selected record
+      @listings = Listing.with_attached_image.where(profile_id: nearby_user, closed: false)
       check_nil?
       ## if there is geolocation stored and user used the filter function
       if params[:filter]
@@ -25,12 +27,15 @@ class ListingsController < ApplicationController
         @listings = @listings.where(product_id: params[:filter], closed: false)
         check_nil?
       end
-    ## User uses the filter function without storing location details
+    ## User uses the filter function without a stored location
     elsif params[:filter]
-     @listings = Listing.where(product_id: params[:filter], closed: false)
+      ## Searches 
+      ## Includes image record for the selected record
+     @listings = Listing.with_attached_image.where(product_id: params[:filter], closed: false)
         check_nil?
     else 
-      @listings = Listing.where(closed: false)
+      ## Inludes image record for the selected record
+      @listings = Listing.with_attached_image.where(closed: false)
     end
   end
 
@@ -90,7 +95,7 @@ class ListingsController < ApplicationController
   def check_nil?
     if @listings.length < 1
       flash.now[:alert] = "No matching result found"
-      @listings = Listing.where(closed: false)
+      @listings = Listing.with_attached_image.where(closed: false)
     end
   end
 end

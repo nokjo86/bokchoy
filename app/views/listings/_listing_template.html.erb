@@ -3,7 +3,7 @@
 <p><%= flash[:unsucess] %></p>
 <% end %>
   <div class="col-md-4">
-    <%=image_tag url_for(listing.image), alt: "#{listing.title} image", class: 'mt-2', style: 'width:100%;' %>
+    <%=image_tag url_for(img_for(listing)), alt: "#{listing.title} image", class: 'mt-2', style: 'width:100%;' %>
   </div>
   <div class="col-md-8">
     <h1><%= listing.title %></h1>
