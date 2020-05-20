@@ -12,7 +12,12 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @profile.update(profile_params)
+    rawdata = Geocoder.search([profile_params[:address_line1],profile_params[:address_line2],profile_params[:suburb],profile_params[:state],profile_params[:postcode]].join(','))
+    if rawdata == []
+      flash[:alert] = "Oop! We could not locate this address. Please re-enter"
+      redirect_to request.referer
+    elsif
+      @profile.update(profile_params)
       session[:back_path] == nil ? (redirect_to root_url) : (redirect_to session[:back_path])
     else
       render :edit
