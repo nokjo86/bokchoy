@@ -16,26 +16,26 @@ class ListingsController < ApplicationController
       ## Convert cookies back to an array
       user_location = JSON.parse cookies[:lat_lon]
       ## Searches any user near the user_location and only return profile id
-      nearby_user = Profile.near(user_location, 20).reorder('').pluck(:id)
+      nearby_user = Profile.near(user_location, 12, units: :km).reorder('').pluck(:id)
       ## Searches and returns listings if profile id matches the array of id
       ## Includes image record for the selected record
-      @listings = Listing.with_attached_image.where(profile_id: nearby_user, closed: false)
+      @listings = Listing.with_attached_image.where(profile_id: nearby_user, closed: false).order(created_at: :desc)
       check_nil?
       ## if there is geolocation stored and user used the filter function
       if params[:filter]
         ## alter @listings with filter
-        @listings = @listings.where(product_id: params[:filter], closed: false)
+        @listings = @listings.where(product_id: params[:filter], closed: false).order(created_at: :desc)
         check_nil?
       end
     ## User uses the filter function without a stored location
     elsif params[:filter]
       ## Searches 
       ## Includes image record for the selected record
-     @listings = Listing.with_attached_image.where(product_id: params[:filter], closed: false)
+     @listings = Listing.with_attached_image.where(product_id: params[:filter], closed: false).order(created_at: :desc)
         check_nil?
     else 
       ## Inludes image record for the selected record
-      @listings = Listing.with_attached_image.where(closed: false)
+      @listings = Listing.with_attached_image.where(closed: false).order(created_at: :desc)
     end
   end
 
@@ -95,7 +95,7 @@ class ListingsController < ApplicationController
   def check_nil?
     if @listings.length < 1
       flash.now[:alert] = "No matching result found"
-      @listings = Listing.with_attached_image.where(closed: false)
+      @listings = Listing.with_attached_image.where(closed: false).order(created_at: :desc)
     end
   end
 end
