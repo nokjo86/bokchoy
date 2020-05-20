@@ -56,7 +56,7 @@ class PaymentsController < ApplicationController
         listing_id: item.listing_id,
         sender_id: user.profile.id,
         recipient_id: Listing.find(item.listing_id).profile_id,
-        body: "Payment has been made for #{item.quantity} unit/s"
+        body: "<System generated> Payment has been made for #{item.quantity} unit/s"
       )
     end
     user.profile.cart.listings.delete_all
