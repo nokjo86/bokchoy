@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
     redirect_to listings_path
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    flash[:alert] = "Oops..We can't find what you are looking for."
+    redirect_to listings_path
+  end
+
   def set_profile
     @profile = current_user.profile
   end
