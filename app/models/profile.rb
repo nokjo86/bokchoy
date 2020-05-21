@@ -11,15 +11,15 @@ class Profile < ApplicationRecord
   geocoded_by :address
   after_validation :geocode_or_reset_coordinates, if: :address_line1_changed?
   after_create :init_cart
-  
+
   private
-  
+
   def init_cart
     self.create_cart
   end
 
   def address
-    [address_line1, address_line2, suburb, state, postcode,"Australia"].join(',')
+    [address_line1, address_line2, suburb, state, postcode, "Australia"].join(',')
   end
 
   def geocode_or_reset_coordinates
@@ -28,5 +28,4 @@ class Profile < ApplicationRecord
       self.longitude = nil
     end
   end
-
 end

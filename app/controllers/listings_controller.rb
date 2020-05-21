@@ -9,7 +9,7 @@ class ListingsController < ApplicationController
     if params[:search]
       ## Searches listings table and selects listing if listing matches the search keyword and is not closed
       ## Includes image record for the selected record
-      @listings = Listing.with_attached_image.where("lower(title) LIKE ?","%#{params[:search].downcase}%").where(closed: false)
+      @listings = Listing.with_attached_image.where("lower(title) LIKE ?", "%#{params[:search].downcase}%").where(closed: false)
       check_nil?
     ## If there is a geolocation stored in the cookie
     elsif cookies[:lat_lon]
@@ -29,11 +29,11 @@ class ListingsController < ApplicationController
       end
     ## User uses the filter function without a stored location
     elsif params[:filter]
-      ## Searches 
+      ## Searches
       ## Includes image record for the selected record
-     @listings = Listing.with_attached_image.where(product_id: params[:filter], closed: false).order(created_at: :desc)
-        check_nil?
-    else 
+      @listings = Listing.with_attached_image.where(product_id: params[:filter], closed: false).order(created_at: :desc)
+      check_nil?
+    else
       ## Inludes image record for the selected record
       @listings = Listing.with_attached_image.where(closed: false).order(created_at: :desc)
     end
@@ -71,15 +71,14 @@ class ListingsController < ApplicationController
   def destroy
     if @listing.carts.length == 0
       @listing.destroy
-      flash[:success] = "Listing deleted successfully" 
-    else 
+      flash[:success] = "Listing deleted successfully"
+    else
       @listing.closed = true
       if @listing.save
-        flash[:alert] = "Listing cannot be deleted but is now closed" 
+        flash[:alert] = "Listing cannot be deleted but is now closed"
       end
     end
     redirect_to profile_path(@profile.id)
-
   end
 
   private

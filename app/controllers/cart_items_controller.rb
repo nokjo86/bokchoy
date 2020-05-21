@@ -1,7 +1,7 @@
 class CartItemsController < ApplicationController
-before_action :authenticate_user!
-before_action :set_profile
-before_action :check_existed?, except: [:create, :destroy]
+  before_action :authenticate_user!
+  before_action :set_profile
+  before_action :check_existed?, except: [:create, :destroy]
 
   def create
     if check_existed? == nil

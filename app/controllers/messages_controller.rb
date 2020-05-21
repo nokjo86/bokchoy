@@ -1,11 +1,11 @@
 class MessagesController < ApplicationController
-before_action :set_profile
+  before_action :set_profile
   def index
     ## Searches the messages table and selects record which doesn't contain parent_id (thread_id) & sender_id or recipient_id matches current user id.
 
-    ## Load the associated user details to minimize queries (calling /finding individual profile > user > username) run for accessing username in the view. 
+    ## Load the associated user details to minimize queries (calling /finding individual profile > user > username) run for accessing username in the view.
 
-    @messages = Message.includes({sender: :user},{recipient: :user}).where(thread_id: nil).where(["sender_id = ? OR recipient_id = ?", @profile.id, @profile.id])
+    @messages = Message.includes({ sender: :user }, { recipient: :user }).where(thread_id: nil).where(["sender_id = ? OR recipient_id = ?", @profile.id, @profile.id])
   end
 
   def show
@@ -31,8 +31,8 @@ before_action :set_profile
   end
 
   private
-  
+
   def msg_params
-    params.require(:message).permit(:body,:thread_id)
+    params.require(:message).permit(:body, :thread_id)
   end
 end

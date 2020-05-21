@@ -20,10 +20,9 @@ class User < ApplicationRecord
       where(conditions.to_h).first
     end
   end
- 
+
   def init_profile
     profile = Profile.new(user_id: self.id)
     profile.save(validate: false)
   end
-
 end

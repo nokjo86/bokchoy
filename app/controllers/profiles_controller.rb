@@ -4,20 +4,18 @@ class ProfilesController < ApplicationController
 
   def show
     ## Loads user profile from the profiles table with its associated listings and pre-load all image records associated to the listing
-    @profile = Profile.includes(listings: {image_attachment: :blob}).find(params[:id])
+    @profile = Profile.includes(listings: { image_attachment: :blob }).find(params[:id])
   end
 
   def edit
-
   end
 
   def update
-    rawdata = Geocoder.search([profile_params[:address_line1],profile_params[:address_line2],profile_params[:suburb],profile_params[:state],profile_params[:postcode]].join(','))
+    rawdata = Geocoder.search([profile_params[:address_line1], profile_params[:address_line2], profile_params[:suburb], profile_params[:state], profile_params[:postcode]].join(','))
     if rawdata == []
       flash[:alert] = "Oop! We could not locate this address. Please re-enter"
       redirect_to request.referer
-    elsif
-      @profile.update(profile_params)
+    elsif @profile.update(profile_params)
       session[:back_path] == nil ? (redirect_to root_url) : (redirect_to session[:back_path])
     else
       render :edit
@@ -25,6 +23,7 @@ class ProfilesController < ApplicationController
   end
 
   private
+
   def location_params
     :location_param
   end

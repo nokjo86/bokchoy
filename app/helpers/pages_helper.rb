@@ -1,5 +1,5 @@
 module PagesHelper
-  ##helper method to recall and fill stored cookie location for index page
+  # #helper method to recall and fill stored cookie location for index page
   def stored_location
     if cookies[:lat_lon]
       geocode = JSON.parse cookies[:lat_lon]
