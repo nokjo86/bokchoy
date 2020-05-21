@@ -58,3 +58,5 @@ gem "geocoder", "~> 1.6"
 gem "faker", "~> 2.11"
 
 gem "stripe", "~> 5.22"
+
+gem "rubocop-rails", "~> 2.5"
