@@ -20,5 +20,4 @@ Rails.application.routes.draw do
   resources :orders, only: [:index, :show]
   post "/set_location", to: "pages#set_location"
   get "/remove_location", to: "pages#remove_location"
-  get '*path' => redirect('/')
 end
